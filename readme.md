@@ -5,10 +5,7 @@
 
 ## Overview
 
-Simple starter C++ project with:
-
-- cmake
-- googletest
+Google Spreadsheet link to logs: https://docs.google.com/spreadsheets/d/1hfvxqkjzauMg8wfQMJMttqfL_XiQ8ah67WwOyFDjMoY/edit?usp=sharing
 
 ## Installation
 
