@@ -5,9 +5,6 @@ add_executable(
     main.cpp
     test.cpp
 )
-include_directories(
-    ${CMAKE_SOURCE_DIR}/Q-Learning
-)
 
 
 target_include_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include)
