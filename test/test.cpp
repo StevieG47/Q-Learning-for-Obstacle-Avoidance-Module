@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../Q-Learning/QLearn.h"
+#include "../include/QLearn.h"
 
 
 TEST(dummy, should_pass) {
