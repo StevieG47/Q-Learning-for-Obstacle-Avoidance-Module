@@ -1,8 +1,9 @@
+#include "QLearn.h"
+
 #include <iostream>
 #include <stdlib.h>
 
-#include "HallwayExample.h"
-#include "Demo.h"
+
 using std::cout;
 using std::endl;
 
@@ -106,7 +107,7 @@ void robot::updateTable(int prevAction, int prevState, bool crash, int state) {
 
   }
 }
-
+/*
 int main() {
   robot Test;      //initiate test var
   int firstRun = 0;  //Can't update Q table on first run, no previous data to go off of
@@ -188,3 +189,4 @@ int main() {
   cout << endl;
   return 0;
 }
+ */

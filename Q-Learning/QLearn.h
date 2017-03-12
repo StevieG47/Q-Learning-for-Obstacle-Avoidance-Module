@@ -1,5 +1,5 @@
-#ifndef DEMO_H_
-#define DEMO_H_
+#ifndef QLEARN_H_
+#define QLEARN_H_
 
 /* Q TABLE
  //Q[row][column]
@@ -28,4 +28,4 @@ class robot {
 };
 
 
-#endif /* DEMO_H_ */
+#endif /* QLEARN_H_ */

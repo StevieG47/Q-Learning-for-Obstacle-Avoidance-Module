@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "../Q-Learning/Demo.h"
-#include "../Q-Learning/Demo.cpp"
+#include "../Q-Learning/QLearn.h"
+
 
 TEST(dummy, should_pass) {
   EXPECT_EQ(1, 1);
