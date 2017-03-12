@@ -1,12 +1,10 @@
 #include <gtest/gtest.h>
-#include "Demo.h"
-#include "Demo.cpp"
+#include "../Q-Learn/Demo.h"
+#include "../Q-Learn/Demo.cpp"
 
- TEST(dummy, should_pass)
- {
- EXPECT_EQ(1, 1);
+TEST(dummy, should_pass) {
+  EXPECT_EQ(1, 1);
 }
-
 
 TEST(QTest,findState) {
   robot Test;
