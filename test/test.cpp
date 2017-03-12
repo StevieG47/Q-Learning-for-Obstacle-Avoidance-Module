@@ -33,6 +33,6 @@ TEST(QTest,updateTable) {
   robot Test;
   Test.Q;
   Test.updateTable(0, 0, false, 0);
-  EXPECT_EQ(Q[0][0], 5);  //check if computing max Future value correctly
+  EXPECT_EQ(Test.Q[0][0], 5);  //check if computing max Future value correctly
 }
 
