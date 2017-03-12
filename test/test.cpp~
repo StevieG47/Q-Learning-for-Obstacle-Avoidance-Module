@@ -1,10 +1,11 @@
 #include <gtest/gtest.h>
-#include "../Q-Learning/QLearn.h"
+#include "../include/QLearn.h"
 
-
+/*
 TEST(dummy, should_pass) {
   EXPECT_EQ(1, 1);
 }
+ */
 
 TEST(QTest,findState) {
   robot Test;
@@ -19,7 +20,7 @@ TEST(QTest,decideAction) {
 
 TEST(QTest,assignReward) {
   robot Test;
-  EXPECT_EQ(Test.assignReward(0, true), 10);  //check if assigning reward correctly
+  EXPECT_EQ(Test.assignReward(0, false), 10);  //check if assigning reward correctly
 }
 
 TEST(QTest,maxFuture) {
@@ -27,3 +28,11 @@ TEST(QTest,maxFuture) {
   Test.Q[1][1] = 55;
   EXPECT_EQ(Test.maxFuture(1), 55);  //check if computing max Future value correctly
 }
+
+TEST(QTest,updateTable) {
+  robot Test;
+  Test.Q;
+  Test.updateTable(0, 0, false, 0);
+  EXPECT_EQ(Q[0][0], 5);  //check if computing max Future value correctly
+}
+
