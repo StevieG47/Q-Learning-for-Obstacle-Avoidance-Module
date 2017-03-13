@@ -1,6 +1,6 @@
 
 add_executable(
-    QLearn-QLearning
+    QLearning-Demo
     Demo.cpp
     QLearn_Demo.cpp
   )

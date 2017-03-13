@@ -1,10 +1,10 @@
 set(GTEST_SHUFFLE 1)
 
 add_executable(
-    cpp-test
+    Qclass-test
     main.cpp
     test.cpp
-    ../QLearning/QLearn.cpp
+    ../QLearning/Qclass.cpp
 )
 
 include_directories(
