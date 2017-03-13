@@ -1,5 +1,5 @@
-#ifndef QLEARN_H_
-#define QLEARN_H_
+#ifndef QLEARN_DEMO_H_
+#define QLEARN_DEMO_H_
 
 /* Q TABLE
  //Q[row][column]
@@ -25,7 +25,9 @@ class robot {
   int assignReward(int prevAction, bool crash);  //assign rewards based on what action was taken
   int maxFuture(int state);
   void updateTable(int prevAction, int prevState, bool crash, int state);
+  void Train();
+  void Perform();
 };
 
 
-#endif /* QLEARN_H_ */
+#endif /* QLEARN_DEMO_H_ */

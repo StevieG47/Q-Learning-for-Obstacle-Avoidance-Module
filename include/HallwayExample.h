@@ -19,7 +19,7 @@
 int getLeft(int prevState, int prevAction) {
   int senseLeft = 999;
   int senseRight = 999;
-  bool crash;
+//  bool crash;
   //DETECT NOTHING
   if (prevState == 0 && prevAction == 0) {  //detect nothing go forward leads to detect nothing
     senseLeft = 0;
@@ -36,7 +36,7 @@ int getLeft(int prevState, int prevAction) {
 
   //DETECT RIGHT
   if (prevState == 1 && prevAction == 0) {  //detect right and go forward, crash
-    crash = true;
+  //  crash = true;
   }
   if (prevState == 1 && prevAction == 1) {  //detect right and turn right, detect both
     senseLeft = 1;
@@ -49,7 +49,7 @@ int getLeft(int prevState, int prevAction) {
 
   //DETECT LEFT
   if (prevState == 2 && prevAction == 0) {  //detect left and go forward, crash
-    crash = true;
+  //crash = true;
   }
   if (prevState == 2 && prevAction == 1) {  //detect left and turn right, detect nothing
     senseLeft = 0;
@@ -62,7 +62,7 @@ int getLeft(int prevState, int prevAction) {
 
   //DETECT BOTH
   if (prevState == 3 && prevAction == 0) {  //detect both and go forward, crash
-    crash = true;
+  //crash = true;
   }
   if (prevState == 3 && prevAction == 1) {  //detect both and turn right. something on left
     senseLeft = 1;
@@ -78,7 +78,7 @@ int getLeft(int prevState, int prevAction) {
 int getRight(int prevState, int prevAction) {
   int senseLeft;
   int senseRight;
-  bool crash;
+  //bool crash;
   //DETECT NOTHING
   if (prevState == 0 && prevAction == 0) {  //detect nothing go forward leads to detect nothing
     senseLeft = 0;
@@ -95,7 +95,7 @@ int getRight(int prevState, int prevAction) {
 
   //DETECT RIGHT
   if (prevState == 1 && prevAction == 0) {  //detect right and go forward, crash
-    crash = true;
+  //crash = true;
   }
   if (prevState == 1 && prevAction == 1) {  //detect right and turn right, detect both
     senseLeft = 1;
@@ -108,7 +108,7 @@ int getRight(int prevState, int prevAction) {
 
   //DETECT LEFT
   if (prevState == 2 && prevAction == 0) {  //detect left and go forward, crash
-    crash = true;
+  //crash = true;
   }
   if (prevState == 2 && prevAction == 1) {  //detect left and turn right, detect nothing
     senseLeft = 0;
@@ -121,7 +121,7 @@ int getRight(int prevState, int prevAction) {
 
   //DETECT BOTH
   if (prevState == 3 && prevAction == 0) {  //detect both and go forward, crash
-    crash = true;
+  //crash = true;
   }
   if (prevState == 3 && prevAction == 1) {  //detect both and turn right. something on left
     senseLeft = 1;
@@ -135,6 +135,7 @@ int getRight(int prevState, int prevAction) {
 }
 
 //GET CRASH
+/*
 bool getCrash(int prevState, int prevAction) {
   int senseLeft;
   int senseRight;
@@ -193,7 +194,7 @@ bool getCrash(int prevState, int prevAction) {
   }
   return crash;
 }
-
+ */
 
 
 #endif /* HALLWAYEXAMPLE_H_ */

@@ -1,11 +1,14 @@
-#include "QLearn.h"
+#include "QLearn_Demo.h"
 
+#include "HallwayExample.h"
 #include <iostream>
 #include <stdlib.h>
 
 
 using std::cout;
 using std::endl;
+
+
 
 //DETERMINE STATE
 int robot::findState(int left, int right) {
@@ -107,9 +110,10 @@ void robot::updateTable(int prevAction, int prevState, bool crash, int state) {
 
   }
 }
-/*
-int main() {
-  robot Test;      //initiate test var
+
+//FUNCTION TO TRAIN ROBOT
+void robot::Train() {
+  // robot Test;      //initiate test var
   int firstRun = 0;  //Can't update Q table on first run, no previous data to go off of
   int prevState;
   int prevAction;
@@ -118,9 +122,6 @@ int main() {
   int left = 0;
   int right = 0;
   bool crash = false;  //initiate not crashing
-
-
-
 
   for (int a = 0; a < 1000; a++) {  //number of iterations to train for
 
@@ -138,7 +139,8 @@ int main() {
     //cout << "sensorRight: " << right << endl;
 
     //Determine state based on left and right sensors
-    int state = Test.findState(left, right);  //set state with sensor vals
+    // int state = Test.findState(left, right);  //set state with sensor vals
+    int state = findState(left, right);
     //cout << "state: " << state << endl;
 
     //CANT UPDATE ON FIRST RUN. IF AFTER THAT UPDATE
@@ -154,14 +156,13 @@ int main() {
       // cout << "Previous Action: " << prevAction << endl;
       //cout << "Previous state: " << prevState << endl;
       //cout << "Current state: " << state << endl;
-      Test.updateTable(prevAction, prevState, crash, state);  //update the Q table
-
+      //  Test.updateTable(prevAction, prevState, crash, state);  //update the Q table
+      updateTable(prevAction, prevState, crash, state);
     }
 
     //Decide action based on current state. Picks either random action or uses table to decide
-    int action = Test.decideAction(state);    //decide action based on state
-
-
+    //  int action = Test.decideAction(state);    //decide action based on state
+    int action = decideAction(state);
 
     prevState = state;    //set prevstate = state before next iteration
     prevAction = action;    //same
@@ -177,16 +178,71 @@ int main() {
       right = 0;
     }
 
-
-
   }
   //PRINT Q TABLE
+  /*
   cout << "Final Q Table: " << endl;
-  cout << Test.Q[0][0] << " " << Test.Q[0][1] << " " << Test.Q[0][2] << endl;
+  cout << Test.Q[0][0] << "  " << Test.Q[0][1] << " " << Test.Q[0][2] << endl;
   cout << Test.Q[1][0] << " " << Test.Q[1][1] << " " << Test.Q[1][2] << endl;
   cout << Test.Q[2][0] << " " << Test.Q[2][1] << " " << Test.Q[2][2] << endl;
-  cout << Test.Q[3][0] << " " << Test.Q[3][1] << " " << Test.Q[3][2] << endl;
-  cout << endl;
-  return 0;
+   cout << Test.Q[3][0] << " " << Test.Q[3][1] << " " << Test.Q[3][2] << endl;*/
+  cout << Q[0][0] << "  " << Q[0][1] << " " << Q[0][2] << endl;
+  cout << Q[1][0] << " " << Q[1][1] << " " << Q[1][2] << endl;
+  cout << Q[2][0] << " " << Q[2][1] << " " << Q[2][2] << endl;
+  cout << Q[3][0] << " " << Q[3][1] << " " << Q[3][2] << endl;
+  cout
+      << "States: 0. detect nothing, 1, detect right, 2. detect left, 3. detect both."
+       << endl;
+  cout
+      << "Actions: 0. Move forward, 1. turn right in place, 2. turn left in place.";
+
 }
- */
+
+//USE Q TABLE TO PERFORM
+void robot::Perform() {
+  //initiate sensor values
+  int left = 1;
+  int right = 1;
+  //no previous action/previous state on first run
+  int firstRun = 0;
+  //intiitae prevState, prevAction
+  int prevState = 0;
+  int prevAction = 0;
+  cout << endl << endl << "Performance using Q Table:" << endl;
+
+  for (int a = 0; a < 5; a++) {    //iterate 5 times
+
+  //Get new sensor values based on what previous state and previous action was
+  //This is for hallway example, see HallwayExample.h for details
+  if (firstRun > 0) {
+    left = getLeft(prevState, prevAction);
+    right = getRight(prevState, prevAction);
+  }
+
+  //Determine state based on left and right sensors
+    int state2 = findState(left, right);  //set state with sensor vals
+
+  //Decide action using highest Q table value.
+  int bestAction;
+  int bestQ = -1000;
+  for (int i = 0; i < 3; i++) {  //cycle through every action for current state
+    if (Q[state2][i] > bestQ) {  //if state action pair Q value is greater than current best value
+      bestQ = Q[state2][i];  //set new highest Q value
+      bestAction = i;  //set new best action
+
+    }
+  }
+    cout << "For state " << state2 << ", action " << bestAction
+         << " was taken"
+         << endl;
+    prevState = state2;  //For next loop
+    prevAction = bestAction;
+    firstRun = 1;  //done with first run
+  }
+  
+}
+
+
+
+
+

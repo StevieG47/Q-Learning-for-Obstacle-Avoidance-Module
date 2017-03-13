@@ -4,7 +4,7 @@ add_executable(
     cpp-test
     main.cpp
     test.cpp
-    ../QLearning/QLearn.cpp
+    ../QLearning/QLearn_Demo.cpp
 )
 
 include_directories(

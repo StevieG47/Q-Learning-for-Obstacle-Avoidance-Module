@@ -1,8 +1,8 @@
 
 add_executable(
     QLearn-QLearning
-    main.cpp
-    QLearn.cpp
+    Demo.cpp
+    QLearn_Demo.cpp
   )
 
 include_directories(
