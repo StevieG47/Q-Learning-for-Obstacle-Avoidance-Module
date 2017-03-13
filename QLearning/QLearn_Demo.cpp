@@ -11,7 +11,7 @@ using std::endl;
 
 
 //DETERMINE STATE
-int robot::findState(int left, int right) {
+int QDemo::findState(int left, int right) {
   int state = 0;
   if (left == 0 && right == 0) {
     state = 0;
@@ -29,7 +29,7 @@ int robot::findState(int left, int right) {
 }
 
 //DECIDE ACTION
-int robot::decideAction(int state) {
+int QDemo::decideAction(int state) {
   int action;
   int Rand = rand() % 100;
 
@@ -62,7 +62,7 @@ int robot::decideAction(int state) {
 }
 
 //ASSIGN REWARD
-int robot::assignReward(int prevAction, bool crash) {
+int QDemo::assignReward(int prevAction, bool crash) {
   int reward;
   if (prevAction == 0) {  //if moved forward reward since we want to explore
     reward = 10;
@@ -78,7 +78,7 @@ int robot::assignReward(int prevAction, bool crash) {
 
 //FIND MAX FUTURE VALUE
 //Need the max future value to update the Q table
-int robot::maxFuture(int state) {
+int QDemo::maxFuture(int state) {
   int currentMax = -100000;  //initiate var to keep track of max
 
   for (int i = 0; i != 3; i++) {  //cycle through every action
@@ -90,7 +90,9 @@ int robot::maxFuture(int state) {
 }
 
 //UPDATE Q TABLE
-void robot::updateTable(int prevAction, int prevState, bool crash, int state) {
+void QDemo::updateTable(int prevAction, int prevState, bool crash, int state) {
+  alpha = .5;
+  gamma = .8;
   double reward = assignReward(prevAction, crash);  //get the reward based on previous action and if crash
 //  cout << "For Q value " << Q[prevState][prevAction] << endl;
 
@@ -112,7 +114,7 @@ void robot::updateTable(int prevAction, int prevState, bool crash, int state) {
 }
 
 //FUNCTION TO TRAIN ROBOT
-void robot::Train() {
+void QDemo::Train() {
   // robot Test;      //initiate test var
   int firstRun = 0;  //Can't update Q table on first run, no previous data to go off of
   int prevState;
@@ -189,11 +191,11 @@ void robot::Train() {
   cout
       << "Demo for a robot with left/right sensors in a narrow hallway. The available actions of the"
 
-      " robot are move forward, turn 45 deg left in place, and turn 45 deg right in place. Turning"
+      " robot are move forward, turn 45 deg right in place, and turn 45 deg left in place. Turning"
 
       " once to the right  will lead to the robot sensing something on the right and nothing on the left."
 
-      " Turning to the right again will lead to both sensors detecting, since there is a wall in front."
+      " Turning to the right again will lead to the both sensors detecting, since a wall is right in front."
       " The robot will crash if it moves forward while detecting anything, meaning it will only be able to move forward"
 
       " without crashing by turning until it is parallel with the walls (detecting nothing)."
@@ -226,7 +228,7 @@ void robot::Train() {
 }
 
 //USE Q TABLE TO PERFORM
-void robot::Perform() {
+void QDemo::Perform() {
   //initiate sensor values
   int left = 1;
   int right = 1;

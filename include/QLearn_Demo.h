@@ -8,17 +8,17 @@
  //Actions: 0 move forward, 1 turn left in place, 2 turn right in place
  */
 //define class
-class robot {
+class QDemo {
  public:
   int state;
-  int prevState;
+  //int prevState;
   int action;
-  int prevAction;
+  //int prevAction;
   int reward;
   int Q[4][3] = { };
 
-  double alpha = .5;
-  double gamma = .8;
+  double alpha;
+  double gamma;
 
   int findState(int left, int right);  //determine state based on sensors
   int decideAction(int state);  //determine action based on state

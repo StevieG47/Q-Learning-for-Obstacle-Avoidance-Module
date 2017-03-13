@@ -18,20 +18,20 @@
 
 int getLeft(int prevState, int prevAction) {
   int senseLeft = 999;
-  int senseRight = 999;
+  // int senseRight = 999;
 //  bool crash;
   //DETECT NOTHING
   if (prevState == 0 && prevAction == 0) {  //detect nothing go forward leads to detect nothing
     senseLeft = 0;
-    senseRight = 0;
+    // senseRight = 0;
   }
   if (prevState == 0 && prevAction == 1) {  //detect nothing turn right, something on the right
     senseLeft = 0;
-    senseRight = 1;
+    //  senseRight = 1;
   }
   if (prevState == 0 && prevAction == 2) {  //detect nothing turn left, something on the left
     senseLeft = 1;
-    senseRight = 0;
+    // senseRight = 0;
   }
 
   //DETECT RIGHT
@@ -40,11 +40,11 @@ int getLeft(int prevState, int prevAction) {
   }
   if (prevState == 1 && prevAction == 1) {  //detect right and turn right, detect both
     senseLeft = 1;
-    senseRight = 1;
+    //  senseRight = 1;
   }
   if (prevState == 1 && prevAction == 2) {  //detect right and turn left, detect nothing
     senseLeft = 0;
-    senseRight = 0;
+    // senseRight = 0;
   }
 
   //DETECT LEFT
@@ -53,11 +53,11 @@ int getLeft(int prevState, int prevAction) {
   }
   if (prevState == 2 && prevAction == 1) {  //detect left and turn right, detect nothing
     senseLeft = 0;
-    senseRight = 0;
+    // senseRight = 0;
   }
   if (prevState == 2 && prevAction == 2) {  //detect left and turn left, detect both
     senseLeft = 1;
-    senseRight = 1;
+    // senseRight = 1;
   }
 
   //DETECT BOTH
@@ -66,30 +66,30 @@ int getLeft(int prevState, int prevAction) {
   }
   if (prevState == 3 && prevAction == 1) {  //detect both and turn right. something on left
     senseLeft = 1;
-    senseRight = 0;
+    //  senseRight = 0;
   }
   if (prevState == 3 && prevAction == 2) {  //detect  both and turn left, something on right
     senseLeft = 0;
-    senseRight = 1;
+    // senseRight = 1;
   }
   return senseLeft;
 }
 
 int getRight(int prevState, int prevAction) {
-  int senseLeft;
+  // int senseLeft;
   int senseRight;
   //bool crash;
   //DETECT NOTHING
   if (prevState == 0 && prevAction == 0) {  //detect nothing go forward leads to detect nothing
-    senseLeft = 0;
+  //  senseLeft = 0;
     senseRight = 0;
   }
   if (prevState == 0 && prevAction == 1) {  //detect nothing turn right, something on the right
-    senseLeft = 0;
+  //  senseLeft = 0;
     senseRight = 1;
   }
   if (prevState == 0 && prevAction == 2) {  //detect nothing turn left, something on the left
-    senseLeft = 1;
+  //   senseLeft = 1;
     senseRight = 0;
   }
 
@@ -98,11 +98,11 @@ int getRight(int prevState, int prevAction) {
   //crash = true;
   }
   if (prevState == 1 && prevAction == 1) {  //detect right and turn right, detect both
-    senseLeft = 1;
+  //  senseLeft = 1;
     senseRight = 1;
   }
   if (prevState == 1 && prevAction == 2) {  //detect right and turn left, detect nothing
-    senseLeft = 0;
+  // senseLeft = 0;
     senseRight = 0;
   }
 
@@ -111,11 +111,11 @@ int getRight(int prevState, int prevAction) {
   //crash = true;
   }
   if (prevState == 2 && prevAction == 1) {  //detect left and turn right, detect nothing
-    senseLeft = 0;
+  //  senseLeft = 0;
     senseRight = 0;
   }
   if (prevState == 2 && prevAction == 2) {  //detect left and turn left, detect both
-    senseLeft = 1;
+  // senseLeft = 1;
     senseRight = 1;
   }
 
@@ -124,11 +124,11 @@ int getRight(int prevState, int prevAction) {
   //crash = true;
   }
   if (prevState == 3 && prevAction == 1) {  //detect both and turn right. something on left
-    senseLeft = 1;
+  //senseLeft = 1;
     senseRight = 0;
   }
   if (prevState == 3 && prevAction == 2) {  //detect  both and turn left, something on right
-    senseLeft = 0;
+  // senseLeft = 0;
     senseRight = 1;
   }
   return senseRight;

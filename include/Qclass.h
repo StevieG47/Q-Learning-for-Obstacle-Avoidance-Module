@@ -9,17 +9,17 @@
  */
 
 //define class
-class Q {
+class Qtable {
  public:
   int state;
-  int prevState;
+  //int prevState;
   int action;
-  int prevAction;
+  // int prevAction;
   int reward;
   int Q[4][3] = { };
 
-  double alpha = .5;
-  double gamma = .8;
+  double alpha;  //= .5;
+  double gamma;  //= .8;
 
   int findState(int left, int right);  //determine state based on sensors
   int decideAction(int state);  //determine action based on state
@@ -29,6 +29,7 @@ class Q {
   void Train();
   void Perform();
 };
+
 
 
 #endif /* QCLASS_H_ */

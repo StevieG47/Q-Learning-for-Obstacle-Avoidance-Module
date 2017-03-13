@@ -11,7 +11,7 @@ using std::endl;
 
 
 //DETERMINE STATE
-int Q::findState(int left, int right) {  //based on sensor value combination find state
+int Qtable::findState(int left, int right) {  //based on sensor value combination find state
   int state = 0;
   if (left == 0 && right == 0) {
     state = 0;
@@ -29,7 +29,7 @@ int Q::findState(int left, int right) {  //based on sensor value combination fin
 }
 
 //DECIDE ACTION
-int Q::decideAction(int state) {
+int Qtable::decideAction(int state) {
   int action;
   int Rand = rand() % 100;
 
@@ -59,7 +59,7 @@ int Q::decideAction(int state) {
 }
 
 //ASSIGN REWARD
-int Q::assignReward(int prevAction, bool crash) {
+int Qtable::assignReward(int prevAction, bool crash) {
   int reward;
   if (prevAction == 0) {  //if moved forward reward since we want to explore
     reward = 10;
@@ -75,7 +75,7 @@ int Q::assignReward(int prevAction, bool crash) {
 
 //FIND MAX FUTURE VALUE
 //Need the max future value to update the Q table
-int Q::maxFuture(int state) {
+int Qtable::maxFuture(int state) {
   int currentMax = -100000;  //initiate var to keep track of max
 
   for (int i = 0; i != 3; i++) {  //cycle through every action
@@ -87,7 +87,9 @@ int Q::maxFuture(int state) {
 }
 
 //UPDATE Q TABLE
-void Q::updateTable(int prevAction, int prevState, bool crash, int state) {
+void Qtable::updateTable(int prevAction, int prevState, bool crash, int state) {
+  alpha = .5;  //variables for update equation
+  gamma = .8;
   double reward = assignReward(prevAction, crash);  //get the reward based on previous action and if crash
 
 
@@ -109,8 +111,8 @@ void Q::updateTable(int prevAction, int prevState, bool crash, int state) {
 }
 
 //FUNCTION TO TRAIN ROBOT
-void Q::Train() {
-  // Q Test;      //initiate test var
+void Qtable::Train() {
+
   int firstRun = 0;  //Can't update Q table on first run, no previous data to go off of
   int prevState;
   int prevAction;
@@ -178,7 +180,7 @@ void Q::Train() {
   }
   //PRINT Q TABLE
   cout << "Final Q Table: " << endl;
-  cout << " " << Q[0][0] << " " << Q[0][1] << " " << Q[0][2];
+  cout << Q[0][0] << " " << Q[0][1] << " " << Q[0][2];
   cout << endl;
   cout << Q[1][0] << " " << Q[1][1] << " " << Q[1][2];
   cout << endl;
@@ -194,15 +196,13 @@ void Q::Train() {
 }
 
 //USE Q TABLE TO PERFORM
-void Q::Perform() {
+void Qtable::Perform() {
   //initiate sensor values
   int left = 1;
   int right = 1;
   //no previous action/previous state on first run
   int firstRun = 0;
-  //initiate prevState, prevAction
-  int prevState = 0;
-  int prevAction = 0;
+
   cout << endl << endl << "Performance using Q Table:" << endl;
 
 //*****************************************************************************
@@ -242,8 +242,7 @@ void Q::Perform() {
     cout << "For state " << state2 << ", action " << bestAction
          << " was taken"
          << endl;
-    prevState = state2;  //For next loop
-    prevAction = bestAction;
+
     firstRun = 1;  //done with first run
   }
   
