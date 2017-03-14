@@ -1,0 +1,188 @@
+\hypertarget{classQtable}{\section{Qtable Class Reference}
+\label{classQtable}\index{Qtable@{Qtable}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classQtable_a9235e8621fd1fd9bbc702cc2784ac45d}{find\-State} (int left, int right)
+\begin{DoxyCompactList}\small\item\em Determines current state given sensor readings. \end{DoxyCompactList}\item 
+int \hyperlink{classQtable_ab6cd699fc0e8dde171ff27aef603186b}{decide\-Action} (int state)
+\begin{DoxyCompactList}\small\item\em Decides an action for the robot to do. Either randomly chosen or chosen with Q table. \end{DoxyCompactList}\item 
+int \hyperlink{classQtable_a3724d3425ba776cb913df0ebb2cabdf4}{assign\-Reward} (int prev\-Action, bool crash)
+\begin{DoxyCompactList}\small\item\em Assigns a reward for updating the table depending on previous action and if crashed. \end{DoxyCompactList}\item 
+int \hyperlink{classQtable_a22175d7aaa86bbbac0712366a8015278}{max\-Future} (int state)
+\begin{DoxyCompactList}\small\item\em Finds the max Q value for a given state, used in update equation. \end{DoxyCompactList}\item 
+void \hyperlink{classQtable_af05903e3e55805fa09c6a6f1faccf9e2}{update\-Table} (int prev\-Action, int prev\-State, bool crash, int state)
+\begin{DoxyCompactList}\small\item\em Updates the Q table after an action has been taken for a given state Want to update the table based on where robot was, what it did, and where it is now. \end{DoxyCompactList}\item 
+void \hyperlink{classQtable_ae95e794c436eaa981a6f949ceb41987a}{Train} ()
+\begin{DoxyCompactList}\small\item\em Training the Q table for a given number of iterations. \end{DoxyCompactList}\item 
+void \hyperlink{classQtable_ad4f04eb93ca6fbdaf0b19604c68b0071}{Perform} ()
+\begin{DoxyCompactList}\small\item\em Uses trained Q table to explore environment. Each state always has one corresponding action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classQtable_ab465d331ceb5e9cfee2cb7d1e8c809fe}{int {\bfseries state}}\label{classQtable_ab465d331ceb5e9cfee2cb7d1e8c809fe}
+
+\item 
+\hypertarget{classQtable_a312195a50887e63e8f25f7846b208fbc}{int {\bfseries action}}\label{classQtable_a312195a50887e63e8f25f7846b208fbc}
+
+\item 
+\hypertarget{classQtable_a4b6c0b62bcdacf6b078e235452275e0b}{int {\bfseries reward}}\label{classQtable_a4b6c0b62bcdacf6b078e235452275e0b}
+
+\item 
+\hypertarget{classQtable_a6d7d6f9fa857dc4c4c77649ea5380e04}{int {\bfseries Q} \mbox{[}4\mbox{]}\mbox{[}3\mbox{]} = \{ \}}\label{classQtable_a6d7d6f9fa857dc4c4c77649ea5380e04}
+
+\item 
+\hypertarget{classQtable_a89e7ef35e39ba6216e31fd2982146196}{double {\bfseries alpha}}\label{classQtable_a89e7ef35e39ba6216e31fd2982146196}
+
+\item 
+\hypertarget{classQtable_a273daf86073f850fab22ee6ee94c29b6}{double {\bfseries gamma}}\label{classQtable_a273daf86073f850fab22ee6ee94c29b6}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classQtable_a3724d3425ba776cb913df0ebb2cabdf4}{\index{Qtable@{Qtable}!assign\-Reward@{assign\-Reward}}
+\index{assign\-Reward@{assign\-Reward}!Qtable@{Qtable}}
+\subsubsection[{assign\-Reward}]{\setlength{\rightskip}{0pt plus 5cm}int Qtable\-::assign\-Reward (
+\begin{DoxyParamCaption}
+\item[{int}]{prev\-Action, }
+\item[{bool}]{crash}
+\end{DoxyParamCaption}
+)}}\label{classQtable_a3724d3425ba776cb913df0ebb2cabdf4}
+
+
+Assigns a reward for updating the table depending on previous action and if crashed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & previous action, bool crash. crash = true means previous action caused a crash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+appropriate reward depending on what happened 
+\end{DoxyReturn}
+\hypertarget{classQtable_ab6cd699fc0e8dde171ff27aef603186b}{\index{Qtable@{Qtable}!decide\-Action@{decide\-Action}}
+\index{decide\-Action@{decide\-Action}!Qtable@{Qtable}}
+\subsubsection[{decide\-Action}]{\setlength{\rightskip}{0pt plus 5cm}int Qtable\-::decide\-Action (
+\begin{DoxyParamCaption}
+\item[{int}]{state}
+\end{DoxyParamCaption}
+)}}\label{classQtable_ab6cd699fc0e8dde171ff27aef603186b}
+
+
+Decides an action for the robot to do. Either randomly chosen or chosen with Q table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & state. Current state of the robot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Action that has been decided. Either 0,1 or 2 since robot only has 3 possible actions. 
+\end{DoxyReturn}
+\hypertarget{classQtable_a9235e8621fd1fd9bbc702cc2784ac45d}{\index{Qtable@{Qtable}!find\-State@{find\-State}}
+\index{find\-State@{find\-State}!Qtable@{Qtable}}
+\subsubsection[{find\-State}]{\setlength{\rightskip}{0pt plus 5cm}int Qtable\-::find\-State (
+\begin{DoxyParamCaption}
+\item[{int}]{left, }
+\item[{int}]{right}
+\end{DoxyParamCaption}
+)}}\label{classQtable_a9235e8621fd1fd9bbc702cc2784ac45d}
+
+
+Determines current state given sensor readings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & left and right, either 0 or 1 representing 0 for detect nothing and 1 for detect something \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current state. Either 0,1,2 or 3 depending on sensor combination. 
+\end{DoxyReturn}
+\hypertarget{classQtable_a22175d7aaa86bbbac0712366a8015278}{\index{Qtable@{Qtable}!max\-Future@{max\-Future}}
+\index{max\-Future@{max\-Future}!Qtable@{Qtable}}
+\subsubsection[{max\-Future}]{\setlength{\rightskip}{0pt plus 5cm}int Qtable\-::max\-Future (
+\begin{DoxyParamCaption}
+\item[{int}]{state}
+\end{DoxyParamCaption}
+)}}\label{classQtable_a22175d7aaa86bbbac0712366a8015278}
+
+
+Finds the max Q value for a given state, used in update equation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & state. Current state of the robot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Max Q value for the current state (max value of row). 
+\end{DoxyReturn}
+\hypertarget{classQtable_ad4f04eb93ca6fbdaf0b19604c68b0071}{\index{Qtable@{Qtable}!Perform@{Perform}}
+\index{Perform@{Perform}!Qtable@{Qtable}}
+\subsubsection[{Perform}]{\setlength{\rightskip}{0pt plus 5cm}void Qtable\-::\-Perform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classQtable_ad4f04eb93ca6fbdaf0b19604c68b0071}
+
+
+Uses trained Q table to explore environment. Each state always has one corresponding action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{classQtable_ae95e794c436eaa981a6f949ceb41987a}{\index{Qtable@{Qtable}!Train@{Train}}
+\index{Train@{Train}!Qtable@{Qtable}}
+\subsubsection[{Train}]{\setlength{\rightskip}{0pt plus 5cm}void Qtable\-::\-Train (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classQtable_ae95e794c436eaa981a6f949ceb41987a}
+
+
+Training the Q table for a given number of iterations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{classQtable_af05903e3e55805fa09c6a6f1faccf9e2}{\index{Qtable@{Qtable}!update\-Table@{update\-Table}}
+\index{update\-Table@{update\-Table}!Qtable@{Qtable}}
+\subsubsection[{update\-Table}]{\setlength{\rightskip}{0pt plus 5cm}void Qtable\-::update\-Table (
+\begin{DoxyParamCaption}
+\item[{int}]{prev\-Action, }
+\item[{int}]{prev\-State, }
+\item[{bool}]{crash, }
+\item[{int}]{state}
+\end{DoxyParamCaption}
+)}}\label{classQtable_af05903e3e55805fa09c6a6f1faccf9e2}
+
+
+Updates the Q table after an action has been taken for a given state Want to update the table based on where robot was, what it did, and where it is now. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & previous state, previous action, state, bool crash, true if crashed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/viki/workspace/\-Midterm/cpp-\/boilerplate/include/Qclass.\-h\item 
+/home/viki/workspace/\-Midterm/cpp-\/boilerplate/\-Q\-Learning/Qclass.\-cpp\end{DoxyCompactItemize}

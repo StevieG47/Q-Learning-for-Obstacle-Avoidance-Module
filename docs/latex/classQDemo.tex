@@ -1,0 +1,188 @@
+\hypertarget{classQDemo}{\section{Q\-Demo Class Reference}
+\label{classQDemo}\index{Q\-Demo@{Q\-Demo}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classQDemo_a2ca217e625c266c533948a11d3a82cb0}{find\-State} (int left, int right)
+\begin{DoxyCompactList}\small\item\em Determines current state given sensor readings. \end{DoxyCompactList}\item 
+int \hyperlink{classQDemo_a01e5738762f8ccad91006485989407aa}{decide\-Action} (int state)
+\begin{DoxyCompactList}\small\item\em Decides an action for the robot to do. Either randomly chosen or chosen with Q table. \end{DoxyCompactList}\item 
+int \hyperlink{classQDemo_a24a1516efe8f30a114980935581c1f7c}{assign\-Reward} (int prev\-Action, bool crash)
+\begin{DoxyCompactList}\small\item\em Assigns a reward for updating the table depending on previous action and if crashed. \end{DoxyCompactList}\item 
+int \hyperlink{classQDemo_ae5a2b3f86e18c70bd949a62a221725bb}{max\-Future} (int state)
+\begin{DoxyCompactList}\small\item\em Finds the max Q value for a given state, used in update equation. \end{DoxyCompactList}\item 
+void \hyperlink{classQDemo_ab0045aa791d191c4fa80e4070b242ae7}{update\-Table} (int prev\-Action, int prev\-State, bool crash, int state)
+\begin{DoxyCompactList}\small\item\em Updates the Q table after an action has been taken for a given state Want to update the table based on where robot was, what it did, and where it is now. \end{DoxyCompactList}\item 
+void \hyperlink{classQDemo_a34db5b42abf20a917a5e509e674ef496}{Train} ()
+\begin{DoxyCompactList}\small\item\em Training the Q table for a given number of iterations. \end{DoxyCompactList}\item 
+void \hyperlink{classQDemo_ac302b5c75eabd51ebce50e24e7b0869f}{Perform} ()
+\begin{DoxyCompactList}\small\item\em Uses trained Q table to explore environment. Each state always has one corresponding action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classQDemo_af13e96338db0faed961b9f5b539eaeb4}{int {\bfseries state}}\label{classQDemo_af13e96338db0faed961b9f5b539eaeb4}
+
+\item 
+\hypertarget{classQDemo_af512f45e34f230bdd35605beaa0333e3}{int {\bfseries action}}\label{classQDemo_af512f45e34f230bdd35605beaa0333e3}
+
+\item 
+\hypertarget{classQDemo_a0a7ea64ed305e6262758f330a3faca71}{int {\bfseries reward}}\label{classQDemo_a0a7ea64ed305e6262758f330a3faca71}
+
+\item 
+\hypertarget{classQDemo_a0e7384b636078a406f75c39ce316edf5}{int {\bfseries Q} \mbox{[}4\mbox{]}\mbox{[}3\mbox{]} = \{ \}}\label{classQDemo_a0e7384b636078a406f75c39ce316edf5}
+
+\item 
+\hypertarget{classQDemo_a30939a56729cfa6bca6e57ecc02c7876}{double {\bfseries alpha}}\label{classQDemo_a30939a56729cfa6bca6e57ecc02c7876}
+
+\item 
+\hypertarget{classQDemo_ac36eb462dd58528d53a0cc3435e59f3a}{double {\bfseries gamma}}\label{classQDemo_ac36eb462dd58528d53a0cc3435e59f3a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classQDemo_a24a1516efe8f30a114980935581c1f7c}{\index{Q\-Demo@{Q\-Demo}!assign\-Reward@{assign\-Reward}}
+\index{assign\-Reward@{assign\-Reward}!QDemo@{Q\-Demo}}
+\subsubsection[{assign\-Reward}]{\setlength{\rightskip}{0pt plus 5cm}int Q\-Demo\-::assign\-Reward (
+\begin{DoxyParamCaption}
+\item[{int}]{prev\-Action, }
+\item[{bool}]{crash}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_a24a1516efe8f30a114980935581c1f7c}
+
+
+Assigns a reward for updating the table depending on previous action and if crashed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & previous action, bool crash. crash = true means previous action caused a crash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+appropriate reward depending on what happened 
+\end{DoxyReturn}
+\hypertarget{classQDemo_a01e5738762f8ccad91006485989407aa}{\index{Q\-Demo@{Q\-Demo}!decide\-Action@{decide\-Action}}
+\index{decide\-Action@{decide\-Action}!QDemo@{Q\-Demo}}
+\subsubsection[{decide\-Action}]{\setlength{\rightskip}{0pt plus 5cm}int Q\-Demo\-::decide\-Action (
+\begin{DoxyParamCaption}
+\item[{int}]{state}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_a01e5738762f8ccad91006485989407aa}
+
+
+Decides an action for the robot to do. Either randomly chosen or chosen with Q table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & state. Current state of the robot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Action that has been decided. Either 0,1 or 2 since robot only has 3 possible actions. 
+\end{DoxyReturn}
+\hypertarget{classQDemo_a2ca217e625c266c533948a11d3a82cb0}{\index{Q\-Demo@{Q\-Demo}!find\-State@{find\-State}}
+\index{find\-State@{find\-State}!QDemo@{Q\-Demo}}
+\subsubsection[{find\-State}]{\setlength{\rightskip}{0pt plus 5cm}int Q\-Demo\-::find\-State (
+\begin{DoxyParamCaption}
+\item[{int}]{left, }
+\item[{int}]{right}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_a2ca217e625c266c533948a11d3a82cb0}
+
+
+Determines current state given sensor readings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & left and right, either 0 or 1 representing 0 for detect nothing and 1 for detect something \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current state. Either 0,1,2 or 3 depending on sensor combination. 
+\end{DoxyReturn}
+\hypertarget{classQDemo_ae5a2b3f86e18c70bd949a62a221725bb}{\index{Q\-Demo@{Q\-Demo}!max\-Future@{max\-Future}}
+\index{max\-Future@{max\-Future}!QDemo@{Q\-Demo}}
+\subsubsection[{max\-Future}]{\setlength{\rightskip}{0pt plus 5cm}int Q\-Demo\-::max\-Future (
+\begin{DoxyParamCaption}
+\item[{int}]{state}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_ae5a2b3f86e18c70bd949a62a221725bb}
+
+
+Finds the max Q value for a given state, used in update equation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & state. Current state of the robot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Max Q value for the current state (max value of row). 
+\end{DoxyReturn}
+\hypertarget{classQDemo_ac302b5c75eabd51ebce50e24e7b0869f}{\index{Q\-Demo@{Q\-Demo}!Perform@{Perform}}
+\index{Perform@{Perform}!QDemo@{Q\-Demo}}
+\subsubsection[{Perform}]{\setlength{\rightskip}{0pt plus 5cm}void Q\-Demo\-::\-Perform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_ac302b5c75eabd51ebce50e24e7b0869f}
+
+
+Uses trained Q table to explore environment. Each state always has one corresponding action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{classQDemo_a34db5b42abf20a917a5e509e674ef496}{\index{Q\-Demo@{Q\-Demo}!Train@{Train}}
+\index{Train@{Train}!QDemo@{Q\-Demo}}
+\subsubsection[{Train}]{\setlength{\rightskip}{0pt plus 5cm}void Q\-Demo\-::\-Train (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_a34db5b42abf20a917a5e509e674ef496}
+
+
+Training the Q table for a given number of iterations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{classQDemo_ab0045aa791d191c4fa80e4070b242ae7}{\index{Q\-Demo@{Q\-Demo}!update\-Table@{update\-Table}}
+\index{update\-Table@{update\-Table}!QDemo@{Q\-Demo}}
+\subsubsection[{update\-Table}]{\setlength{\rightskip}{0pt plus 5cm}void Q\-Demo\-::update\-Table (
+\begin{DoxyParamCaption}
+\item[{int}]{prev\-Action, }
+\item[{int}]{prev\-State, }
+\item[{bool}]{crash, }
+\item[{int}]{state}
+\end{DoxyParamCaption}
+)}}\label{classQDemo_ab0045aa791d191c4fa80e4070b242ae7}
+
+
+Updates the Q table after an action has been taken for a given state Want to update the table based on where robot was, what it did, and where it is now. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & previous state, previous action, state, bool crash, true if crashed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/viki/workspace/\-Midterm/cpp-\/boilerplate/include/Q\-Learn\-\_\-\-Demo.\-h\item 
+/home/viki/workspace/\-Midterm/cpp-\/boilerplate/\-Q\-Learning/Q\-Learn\-\_\-\-Demo.\-cpp\end{DoxyCompactItemize}

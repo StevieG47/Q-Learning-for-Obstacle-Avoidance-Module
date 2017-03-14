@@ -1,5 +1,29 @@
-// Copyright [2017] <Steven Gambino>
-
+/* MIT License
+ Copyright (c) 2017 Steven Gambino
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ * @copyright Copyright 2017 Steven Gambino
+ * @file Qclass.cpp
+ * @author Steven Gambino
+ * @brief Defines all functions needed to train/use a Q table for robot
+ *
+ * For ACME robotics robot with two sensors, three possible actions,
+ * the functions necessary for the robot to learn to explore while avoiding
+ * obstacles are present here. This class' header file in Qclass.h.
+ */
 
 // ***********************************************************************
 // INCLUDE FILES NEEDED FOR READING DATA FROM SENSORS
@@ -15,6 +39,11 @@ using std::endl;
 
 
 // DETERMINE STATE
+/**
+ * @brief Determines current state given sensor readings
+ * @param int left and right, either 0 or 1 representing 0 for detect nothing and 1 for detect something
+ * @return Current state. Either 0,1,2 or 3 depending on sensor combination.
+ */
 int Qtable::findState(int left, int right) {  // based on sensor value combination find state
   int state = 0;
   if (left == 0 && right == 0) {
@@ -33,6 +62,11 @@ int Qtable::findState(int left, int right) {  // based on sensor value combinati
 }
 
 // DECIDE ACTION
+/**
+ * @brief Decides an action for the robot to do. Either randomly chosen or chosen with Q table.
+ * @param int state. Current state of the robot.
+ * @return Action that has been decided. Either 0,1 or 2 since robot only has 3 possible actions.
+ */
 int Qtable::decideAction(int state) {
   int action;
   int Rand = rand() % 100;
@@ -59,6 +93,11 @@ int Qtable::decideAction(int state) {
 }
 
 // ASSIGN REWARD
+/**
+ * @brief Assigns a reward for updating the table depending on previous action and if crashed
+ * @param int previous action, bool crash. crash = true means previous action caused a crash
+ * @return appropriate reward depending on what happened
+ */
 int Qtable::assignReward(int prevAction, bool crash) {
   int reward;
   if (prevAction == 0) {  // if moved forward reward since we want to explore
@@ -74,6 +113,11 @@ int Qtable::assignReward(int prevAction, bool crash) {
 
 // FIND MAX FUTURE VALUE
 // Need the max future value to update the Q table
+/**
+ * @brief Finds the max Q value for a given state, used in update equation.
+ * @param int state. Current state of the robot.
+ * @return Max Q value for the current state (max value of row).
+ */
 int Qtable::maxFuture(int state) {
   int currentMax = -100000;  // initiate var to keep track of max
 
@@ -85,6 +129,12 @@ int Qtable::maxFuture(int state) {
 }
 
 // UPDATE Q TABLE
+/**
+ * @brief Updates the Q table after an action has been taken for a given state
+ * Want to update the table based on where robot was, what it did, and where it is now
+ * @param int previous state, previous action, state, bool crash, true if crashed
+ * @return none
+ */
 void Qtable::updateTable(int prevAction, int prevState, bool crash, int state) {
   alpha = .5;  // variables for update equation
   gamma = .8;
@@ -105,6 +155,11 @@ void Qtable::updateTable(int prevAction, int prevState, bool crash, int state) {
 }
 
 // FUNCTION TO TRAIN ROBOT
+/**
+ * @brief Training the Q table for a given number of iterations
+ * @param none
+ * @return none
+ */
 void Qtable::Train() {
   int firstRun = 0;  // Can't update Q table on first run, no previous data to go off of
   int prevState;
@@ -185,6 +240,11 @@ void Qtable::Train() {
 }
 
 // USE Q TABLE TO PERFORM
+/**
+ * @brief Uses trained Q table to explore environment. Each state always has one corresponding action.
+ * @param none
+ * @return none
+ */
 void Qtable::Perform() {
   // initiate sensor values
   int left = 1;
