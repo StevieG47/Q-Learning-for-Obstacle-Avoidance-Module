@@ -1,0 +1,4 @@
+../QLearning/Qclass.cpp:72:  Consider using rand_r(...) instead of rand(...) for improved thread safety.  [runtime/threadsafe_fn] [2]
+../QLearning/Qclass.cpp:76:  Consider using rand_r(...) instead of rand(...) for improved thread safety.  [runtime/threadsafe_fn] [2]
+../QLearning/QLearn_Demo.cpp:69:  Consider using rand_r(...) instead of rand(...) for improved thread safety.  [runtime/threadsafe_fn] [2]
+../QLearning/QLearn_Demo.cpp:73:  Consider using rand_r(...) instead of rand(...) for improved thread safety.  [runtime/threadsafe_fn] [2]

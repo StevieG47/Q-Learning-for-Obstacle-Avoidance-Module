@@ -34,10 +34,10 @@
 // Actions: 0 move forward, 1 turn left in place, 2 turn right in place
 
 // Q TABLE
-//Q[row][column]
-//rows are states, columns are actions
-//States: 0 detect nothing, 1 detect right, 2 detect left, 3 detect both (front)
-//Actions: 0 move forward, 1 turn left in place, 2 turn right in place
+// Q[row][column]
+// rows are states, columns are actions
+// States: 0 detect nothing, 1 detect right, 2 detect left, 3 detect both (front)
+// Actions: 0 move forward, 1 turn left in place, 2 turn right in place
 
 /* @brief
  * Define Q Learning Demo class

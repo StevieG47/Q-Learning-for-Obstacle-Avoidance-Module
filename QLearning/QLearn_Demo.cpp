@@ -35,7 +35,7 @@ using std::endl;
 
 
 
-//DETERMINE STATE
+// DETERMINE STATE
 /**
  * @brief Determines current state given sensor readings
  * @param int left and right, either 0 or 1 representing 0 for detect nothing and 1 for detect something
@@ -58,7 +58,7 @@ int QDemo::findState(int left, int right) {  // based on sensor value combinatio
   return state;
 }
 
-//DECIDE ACTION
+// DECIDE ACTION
 /**
  * @brief Decides an action for the robot to do. Either randomly chosen or chosen with Q table.
  * @param int state. Current state of the robot.
@@ -70,13 +70,12 @@ int QDemo::decideAction(int state) {
 
   // 35 percent chance of choosing a random action. Want random action sometimes to explore new possibilities/possible better action
   if (Rand > 65) {
-    int randAction = rand() % 3;  //random number between 0 and 2
+    int randAction = rand() % 3;  // random number between 0 and 2
 
     action = randAction;
     // cout << "Random action " << action << " was chosen" << endl;  //print we did a random action
-  }
-  // Use Q table to choose highest rated action for current state, do this most of the time
-  else {
+    // Use Q table to choose highest rated action for current state, do this most of the time
+  } else {
     int bestAction;  // initiate best action var
     int bestQ = -100000;  // initiate best Q value, this corresponds to a state action pair value
     // cout << "Best Q: " << bestQ << endl;
@@ -84,7 +83,6 @@ int QDemo::decideAction(int state) {
       if (Q[state][i] > bestQ) {  // if state action pair Q value is greater than current best value
         bestQ = Q[state][i];  // set new highest Q value
         bestAction = i;  // set new best action
-
       }
     }
     // print we used Q table, what we did
@@ -96,7 +94,7 @@ int QDemo::decideAction(int state) {
   return action;  // return chosen action
 }
 
-//ASSIGN REWARD
+// ASSIGN REWARD
 /**
  * @brief Assigns a reward for updating the table depending on previous action and if crashed
  * @param int previous action, bool crash. crash = true means previous action caused a crash
@@ -116,8 +114,8 @@ int QDemo::assignReward(int prevAction, bool crash) {
   return reward;
 }
 
-//FIND MAX FUTURE VALUE
-//Need the max future value to update the Q table
+// FIND MAX FUTURE VALUE
+// Need the max future value to update the Q table
 /**
  * @brief Finds the max Q value for a given state, used in update equation.
  * @param int state. Current state of the robot.
@@ -130,11 +128,10 @@ int QDemo::maxFuture(int state) {
     if (Q[state][i] > currentMax)  // if state action pair Q value greater than current Q value
       currentMax = Q[state][i];  // set new max Q value
   }
-
   return currentMax;
 }
 
-//UPDATE Q TABLE
+// UPDATE Q TABLE
 /**
  * @brief Updates the Q table after an action has been taken for a given state
  * Want to update the table based on where robot was, what it did, and where it is now
@@ -151,20 +148,17 @@ void QDemo::updateTable(int prevAction, int prevState, bool crash, int state) {
   if (crash == true) {  // if crash, the new state doesn't count, it crashed
     Q[prevState][prevAction] = Q[prevState][prevAction] + alpha * (reward)
         - Q[prevState][prevAction];
-  }
-
-  else {
+  } else {
   Q[prevState][prevAction] =
       Q[prevState][prevAction]
           + alpha
           * (reward + (gamma * maxFuture(state))
                   - Q[prevState][prevAction]);
     // cout << "Reward  " << reward << endl;
-
   }
 }
 
-//FUNCTION TO TRAIN ROBOT
+// FUNCTION TO TRAIN ROBOT
 /**
  * @brief Training the Q table for a given number of iterations
  * @param none
@@ -181,7 +175,6 @@ void QDemo::Train() {
   bool crash = false;  // initiate not crashing
 
   for (int a = 0; a < 1000; a++) {  // number of iterations to train for
-
     // If the first run has finished use getLeft and getRight to get sensor values
     // Can't use these on first run since they require a previous state and previous action
     if (firstRun > 0) {
@@ -190,7 +183,6 @@ void QDemo::Train() {
       left = getLeft(prevState, prevAction);
       right = getRight(prevState, prevAction);
     }
-
     // print the sensor values
     // cout << "sensorLeft: " << left << endl;
     // cout << "sensorRight: " << right << endl;
@@ -199,11 +191,11 @@ void QDemo::Train() {
     int state = findState(left, right);
     // cout << "state: " << state << endl;
 
-    //CANT UPDATE ON FIRST RUN. IF AFTER THAT UPDATE
+    // CANT UPDATE ON FIRST RUN. IF AFTER THAT UPDATE
     if (firstRun > 0) {
       if ((prevState == 3 && prevAction == 0)
           || (prevState == 1 && prevAction == 0)
-          || (prevState == 2 && prevAction == 0)) {  //if something detected and move forward, crash
+          || (prevState == 2 && prevAction == 0)) {  // if something detected and move forward, crash
         crash = true;
       }
 
@@ -231,7 +223,6 @@ void QDemo::Train() {
       left = 0;    // give initial sensor values again
       right = 0;
     }
-
   }
   // PRINT Q TABLE
   cout
@@ -247,7 +238,6 @@ void QDemo::Train() {
       " without crashing by turning until it is parallel with the walls (detecting nothing)."
       << endl;
 
-      
   cout << endl << "Final Q Table: " << endl;
   cout << " " << Q[0][0] << " " << Q[0][1] << " " << Q[0][2] << endl;
   cout << Q[1][0] << " " << Q[1][1] << " " << Q[1][2] << endl;
@@ -270,10 +260,8 @@ void QDemo::Train() {
       " the best action is to turn left. For state 2, detect left, the best action is"
       " to turn right. And for state 3, detect both, the best action is to turn right.";
   cout << endl;
-
 }
-
-//USE Q TABLE TO PERFORM
+// USE Q TABLE TO PERFORM
 /**
  * @brief Uses trained Q table to explore environment. Each state always has one corresponding action.
  * @param none
@@ -291,7 +279,6 @@ void QDemo::Perform() {
   cout << endl << endl << "Performance using Q Table:" << endl;
 
   for (int a = 0; a < 5; a++) {    // iterate 5 times
-
     // Get new sensor values based on what previous state and previous action was
     // This is for hallway example, see HallwayExample.h for details
   if (firstRun > 0) {
@@ -300,7 +287,7 @@ void QDemo::Perform() {
   }
 
     // Determine state based on left and right sensors
-    int state2 = findState(left, right);  //set state with sensor vals
+    int state2 = findState(left, right);  // set state with sensor vals
 
     // Decide action using highest Q table value.
   int bestAction;
@@ -309,7 +296,6 @@ void QDemo::Perform() {
       if (Q[state2][i] > bestQ) {  // if state action pair Q value is greater than current best value
         bestQ = Q[state2][i];  // set new highest Q value
         bestAction = i;  // set new best action
-
     }
   }
     cout << "For state " << state2 << ", action " << bestAction
@@ -326,7 +312,6 @@ void QDemo::Perform() {
 
       " (or detects nothing). It then goes straight."
       << endl;
-  
 }
 
 

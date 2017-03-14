@@ -1,0 +1,7 @@
+Done processing ../include/HallwayExample.h
+Done processing ../include/Qclass.h
+Done processing ../include/QLearn_Demo.h
+Done processing ../QLearning/Qclass.cpp
+Done processing ../QLearning/QLearn_Demo.cpp
+Done processing ../QLearning/Demo.cpp
+Total errors found: 4
