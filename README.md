@@ -6,15 +6,17 @@
 ## Overview
 The method of allowing a robot to learn its own enviornment can be beneficial for robots that will be constantly operating in new environments. In these situations, it might be more challenging to manually code the robot to explore and avoid obstacles without prior knowledge of the environment. The problem becomes even more difficuly as more sensors are added and the environments become more complex. Using reinforcement learning, robots can train themselves to explore a previously unknown environment.
 
-Q Learning is one such reinforcement technique, and uses the idea of state-action pairs. States of the robot are determined by the readings from sensors and are defined by the user. In the demo presented here, two sensors are used, leading to four states: 1. Detect nothing, 2. Detect Left, 3. Detect Right, and 4. Detect both. Possible actions are also defined be the user. In the demo, there are three possible actions: 1. Move Forward, 2. Turn left in place, 3. Turn right in place. The Q Learning method uses a Q table, which consists of a Q value every state-action pair. The rows of the table are the states and the columns are the actions. The table is updated during training depending on what action was done for specific states. Rewards are assigned to update the Q table, the reward assignments in this demo are: +10 for moving forward, 0 for turning in place, and -100 for crashing. This promotes exploration of the robot (as opposed to just turning in place forever) but also punishes actions that will lead to crashing for a given state. After many iterations of performing actions, recieving rewards, and updating the table, the result will be a best action for every state. The robot uses the final Q table to pick the best action and explore its environment.
+Q Learning is one such reinforcement technique, and uses the idea of state-action pairs. States of the robot are determined by the readings from sensors and are defined by the user. In the design presented here, two sensors are used, leading to four states: 1. Detect nothing, 2. Detect Left, 3. Detect Right, and 4. Detect both. Possible actions are also defined be the user. In this design, there are three possible actions: 1. Move Forward, 2. Turn left in place, 3. Turn right in place.
+
+The Q Learning method uses a Q table, which consists of a Q value for every state-action pair. The rows of the table are the states and the columns are the actions. The table is updated during training depending on what action was done for specific states. Rewards are assigned to update the Q table, the reward assignments in this design are: +10 for moving forward, 0 for turning in place, and -100 for crashing. This promotes exploration of the robot (as opposed to just turning in place forever) but also punishes actions that will lead to crashing for a given state. After many iterations of performing actions, recieving rewards, and updating the table, the result will be a best action for every state. The robot uses the final Q table to pick the best action and explore its environment.
 
 During training, the Q table is updated after an action is taken. The update is done using the equation shown below:
 ![qequation](https://cloud.githubusercontent.com/assets/25371934/23921439/03ba6de0-08d5-11e7-9a23-0e313e43fa0f.png)
 
-The values for learning rate and discount factor are constant. In the demo, alpha=.5 and gamma=.8. After training, the Q table is not updated, just used to pick the best action. A more in depth example of using reinforcement learning to have a robot avoid obstacles can be seen [here](http://www.ice.ci.ritsumei.ac.jp/~ruck/CLASSES/INTELISYS/NN-Q.pdf).
+The values for learning rate and discount factor are constant. For this design, alpha=.5 and gamma=.8. After training, the Q table is not updated, just used to pick the best action. A more in depth example of using reinforcement learning to have a robot avoid obstacles can be seen [here](http://www.ice.ci.ritsumei.ac.jp/~ruck/CLASSES/INTELISYS/NN-Q.pdf).
 
 ## Features
-This project provides a  Q Learning implementation for the simple two sensor robot with three actions, move forward, turn left, and turn right. This module is designed to work with the sensor/getting information module and the performing actions/actuator module. Qclass.cpp with Qclass.h provides a class that can train the robot, and use the trained Q table to explore. This includes determining the state, deciding an action, and updating the Q table. By working with the other modules mentioned, the robot will learn the enviornemnt and successfully explore it while avoiding obstacles. The Q table is 4x3, an empty table is shown below:
+This project provides a  Q Learning implementation for the simple two sensor robot with three actions: move forward, turn left, and turn right. This module is designed to work with the sensor/getting information module and the performing actions/actuator module. Qclass.cpp with Qclass.h provides a class that can train the robot, and use the trained Q table to explore. This includes determining the state, deciding an action, and updating the Q table. By working with the other modules mentioned, the robot will learn the enviornemnt and successfully explore it while avoiding obstacles. The Q table is 4x3, an empty table is shown below:
 
 ![qtable](https://cloud.githubusercontent.com/assets/25371934/23924075/ab1906a0-08df-11e7-9b8c-eeb2828760bd.JPG)
 
@@ -31,7 +33,7 @@ After running the demo, the final Q table is displayed:
 
 ![qdemotable](https://cloud.githubusercontent.com/assets/25371934/23925614/72e3ac98-08e6-11e7-98d5-9b83a4c45330.JPG)
 
-We see that for the first state, detect nothing, the best action is move forward with a score of 41. This makes sense since this is the only state when we want the robot to move forward. For the next state, detect right, the best action is to turn left with a score of 31.  This also since makes sense since we want to turn away from obstacles. The next state, detect right has a best action of turn left, and the last state, detect both , has a best action of turn right. 
+We see that for the first state, detect nothing, the best action is move forward with a score of 41. This makes sense since this is the only state when we want the robot to move forward. For the next state, detect right, the best action is to turn left with a score of 31.  This also since makes sense since we want to turn away from obstacles. The next state, detect left has a best action of turn right, and the last state, detect both , has a best action of turn right. 
 
 The Q table is used for 5 actions, the results are shown below: 
 
@@ -41,7 +43,7 @@ With state 0 = detect nothing, state 1 = detect right, state 2 = detect left, an
 
 While simple, this example shows how the robot learned to avoid crashing while exploring its environment. 
 
-### Results
+
 ## License
 - Project uses the MIT License
 ```
@@ -97,14 +99,17 @@ cd build
 ```
 
 ## Doxygen Documentaion
-- To generate documentation:
+- To generate documentation from Q-Learning-for-Obstacle-Avoidance-Module:
 ```
 cd docs
 doxygen configQ
 ```
-HTML and Latex output are created in the docs directory. To easily view documentation page, load *annotaed.html* in the *html* directory.
+HTML and Latex output are created in the docs directory. To easily view documentation page, open *annotated.html* in the *html* directory.
 
 ## SIP Process
-- Design and Development done using the SIP process. Product backlog, iteration backlog, and worklog can be viewed using the google spreadsheet link below:
+- Design and Development done using the SIP process. Tasks were split up and ordered. Time to complete tasks and defects were logged. Product backlog, iteration backlog, and worklog can be viewed using the google spreadsheet link below:
 
 https://docs.google.com/spreadsheets/d/1hfvxqkjzauMg8wfQMJMttqfL_XiQ8ah67WwOyFDjMoY/edit?usp=sharing
+
+Iteration 1 --> Released functional Q-Learning program, successfully trains and uses table.
+Iteration 2 --> Released Demo, tests, and documentation, program finalized. 
