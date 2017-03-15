@@ -188,12 +188,11 @@ void Qtable::Train() {
 
     // Will update after first run is complete
     if (firstRun > 0) {
-      if ((prevState == 3 && prevAction == 0)
-          || (prevState == 1 && prevAction == 0)
-          || (prevState == 2 && prevAction == 0)) {  // if something detected and move forward, crash
+      // **************************************************
+      // INSERT FUCNTION TO CHECK CRASH
+      // if (getCrash() == true)
+      // **************************************************
         crash = true;
-      }
-
       // Update the Q Table based on prevstate, prevaction , and current state
       updateTable(prevAction, prevState, crash, state);
     }
