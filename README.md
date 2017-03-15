@@ -112,4 +112,5 @@ HTML and Latex output are created in the docs directory. To easily view document
 https://docs.google.com/spreadsheets/d/1hfvxqkjzauMg8wfQMJMttqfL_XiQ8ah67WwOyFDjMoY/edit?usp=sharing
 
 Iteration 1 --> Released functional Q-Learning program, successfully trains and uses table.
+
 Iteration 2 --> Released Demo, tests, and documentation, program finalized. 
